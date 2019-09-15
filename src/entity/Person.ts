@@ -1,24 +1,29 @@
-import {Column, Entity, PrimaryColumn} from "typeorm";
+import {Column, Entity, JoinColumn, ManyToOne, PrimaryColumn} from "typeorm";
+import Book from "./Book";
 
-Entity()
-export class Persons {
+@Entity()
+export default class Person {
 
     @PrimaryColumn({ name: "id" })
-    db_id: number;
+    public dataBaseId: number;
 
-    //@Column({ name: "book_id" })
+    @Column({ name: "book_id" })
+    public id: number;
 
+    @ManyToOne(() => Book, (book) => book.persons)
+    @JoinColumn({ name: "book_id" })
+    public book: Book;
 
     @Column({ name: "first_name", nullable: true })
-    firstName: string;
+    public firstName: string;
 
     @Column({ name: "middle_name", nullable: true })
-    middleName: string;
+    public middleName: string;
 
     @Column({ name: "last_name", nullable: true })
-    lastName: string;
+    public lastName: string;
 
     @Column({ name: "dt" })
-    role: string;
+    public role: string;
 
 }

@@ -1,15 +1,19 @@
-import {Entity, Column, PrimaryColumn} from "typeorm";
+import {Column, Entity, OneToMany, PrimaryColumn} from "typeorm";
+import Book from "./Book";
 
 @Entity()
-export class Files {
+export default class File {
 
     @PrimaryColumn()
-    id: number;
+    public id: number;
 
     @Column()
-    name: string;
+    public name: string;
 
     @Column()
-    done: number;
+    public done: number;
+
+    @OneToMany(() => Book, (book) => book.file)
+    public books: Book[];
 
 }
