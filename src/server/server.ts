@@ -1,7 +1,7 @@
 import express from "express";
 import "reflect-metadata";
 import {createConnection} from "typeorm";
-import Book from "../entity/Book";
+import Book from "./entity/Book";
 const app = express();
 const port = 3000;
 
