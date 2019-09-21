@@ -2,9 +2,10 @@
    "compilerOptions": {
       "lib": [
          "es5",
-         "es6"
+         "es6",
+         "dom"
       ],
-      "target": "es6",
+      "target": "esnext",
       "module": "commonjs",
       "moduleResolution": "node",
       "outDir": "./build",
@@ -14,6 +15,7 @@
       "allowSyntheticDefaultImports": true,
       "esModuleInterop": true,
       "strict": false,
-      "strictPropertyInitialization": false
+      "strictPropertyInitialization": false,
+      "jsx": "react"
    }
 }
