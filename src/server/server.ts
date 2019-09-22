@@ -12,7 +12,7 @@ createConnection()
             const books = await bookRepository.find({ relations: ["persons"], take: 1000 });
 
             app.get("/api/books", (req, res) => {
-                res.send(JSON.stringify(books[0].persons));
+                res.send(JSON.stringify(books[0]));
             });
 
             app.listen(3000, () => {
