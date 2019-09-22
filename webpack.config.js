@@ -2,6 +2,7 @@ let path = require('path');
 
 module.exports = {
     // Change to your "entry-point".
+    devtool: "source-map",
     entry: './src/client/index',
     mode: 'development',
     output: {
@@ -13,7 +14,8 @@ module.exports = {
         extensions: ['.ts', '.tsx', '.js', '.json']
     },
     devServer: {
-        overlay: true
+        overlay: true,
+        // contentBase: ""
     },
     module: {
         rules: [{
