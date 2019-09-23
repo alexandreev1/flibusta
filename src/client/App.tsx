@@ -1,49 +1,51 @@
-import React from "react";
+import axios from "axios";
+import React, {useEffect, useState} from "react";
+import Table from "react-bootstrap/Table";
 import Book from "../server/entity/Book";
-import Tabs from "react-bootstrap/Tabs";
-import Tab from "react-bootstrap/Tab";
 
-export interface App {
-    book: Book[]
-}
+const App = () => {
 
-const App: React.FC<App> = ({ book }) => {
+    const [books, setBooks] = useState<Book[]>([]);
+
+    async function getBooks() {
+        try {
+            const response = await axios.get("http://localhost:3000/api/books");
+            setBooks(response.data);
+        } catch (e) {
+            throw new Error(`Была обнаружена ошибка ${e}. Пожалуйста, проверьте правильность выполнения запроса.`);
+        }
+    }
+
+    useEffect(() => { getBooks(); }, []);
 
     return(
-        <div>Hello world!
-            <Tabs
-                justify
-                className="bg-dark"
-                id="books"
-            >
-                <Tab
-                    title="Книги"
-                    tabClassName="customTab"
-                >
-                    <div className="books-grid">
-                        <div className="books-grid-row">
-                            <div>Название</div>
-                            <div className="text-center">Жанр</div>
-                            <div className="text-center">Язык</div>
-                            <div className="text-center">Язык оргининала</div>
-                            <div className="text-center">Идентификатор</div>
-                            <div className="text-center">Имя файла</div>
-                            <div className="text-center">Точка входа</div>
-                        </div>
-                        {book.map( books => (
-                            <div className="books-grid-row">
-                                <div>{ books.title }</div>
-                                <div className="text-center">{ books.genre }</div>
-                                <div className="text-center">{ books.language }</div>
-                                <div className="text-center">{ books.sourceLanguage }</div>
-                                <div className="text-center">{ books.guid }</div>
-                                <div className="text-center">{ books.file }</div>
-                                <div className="text-center">{ books.entry }</div>
-                            </div>
-                        ))}
-                    </div>
-                </Tab>
-            </Tabs>
+        <div>
+            <Table striped bordered hover  size="sm" variant="dark">
+                <thead>
+                <tr>
+                    <th>Название</th>
+                    <th>Жанр</th>
+                    <th>Язык</th>
+                    <th>Язык оргининала</th>
+                    <th>Идентификатор</th>
+                    <th>Имя файла</th>
+                    <th>Точка входа</th>
+                </tr>
+                </thead>
+                <tbody>
+                {books.map( (book) => (
+                    <tr>
+                        <td key={book.id}>{ book.title }</td>
+                        <td>{ book.genre }</td>
+                        <td>{ book.language }</td>
+                        <td>{ book.sourceLanguage }</td>
+                        <td>{ book.guid }</td>
+                        <td>{ book.file }</td>
+                        <td>{ book.entry }</td>
+                    </tr>
+                ))}
+                </tbody>
+            </Table>
         </div>
     );
 };

@@ -1,3 +1,4 @@
+import cors from "cors";
 import express from "express";
 import "reflect-metadata";
 import {createConnection} from "typeorm";
@@ -5,14 +6,16 @@ import Book from "./entity/Book";
 const app = express();
 const port = 3000;
 
+app.use(cors());
+
 createConnection()
     .then(
         async (connection) => {
             const bookRepository = connection.getRepository(Book);
-            const books = await bookRepository.find({ relations: ["persons"], take: 1000 });
+            const books = await bookRepository.find({ relations: ["persons"], take: 100 });
 
             app.get("/api/books", (req, res) => {
-                res.send(JSON.stringify(books[0]));
+                res.send(JSON.stringify(books));
             });
 
             app.listen(3000, () => {
