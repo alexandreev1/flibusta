@@ -11,7 +11,7 @@ module.exports = {
         publicPath: '/dist'
     },
     resolve: {
-        extensions: ['.ts', '.tsx', '.js', '.json']
+        extensions: ['.ts', '.tsx', '.js', '.json', '.png']
     },
     devServer: {
         overlay: true,
@@ -23,6 +23,13 @@ module.exports = {
             test: /\.(ts|js)x?$/,
             exclude: /node_modules/,
             loader: 'babel-loader'
+        }, {
+            test: /\.(png|jpe?g|gif)$/i,
+            use: [
+                {
+                    loader: 'file-loader',
+                }
+            ]
         }],
     }
 };

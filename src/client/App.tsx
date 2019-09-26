@@ -1,14 +1,12 @@
 import React from "react";
 import BookTable from "./BookTable";
+import Krown from "./Krown";
 
 const App = () => {
     return(
         <div>
-            <head />
-            <body>
-                <BookTable />
-            </body>
-            <footer />
+            <Krown />
+            <BookTable />
         </div>
     );
 };
